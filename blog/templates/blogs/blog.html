@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        .promo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+        }
+
+        .promo__block {
+            margin-top: 50px;
+        }
+
+        .promo__item {
+            width: 300px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .promo__item button a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .promo__item button {
+            background-color: darkslateblue;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            width: 100px;
+        }
+        .promo__blog a{
+            width: 300px;
+            height: 350px;
+            text-decoration: none;
+            color: black;
+        }
+        .promo__blog_item {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+            box-shadow: 0 0 2px 3px rgba(0, 0, 0, 0.57);
+        }
+
+        .promo__blog_item img {
+            width: 100%;
+            height: 50%;
+            align-self: center;
+        }
+
+        .promo__blog {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 100px;
+            width: 100%;
+            gap: 30px;
+            min-height: 400px;
+            overflow-y: auto;
+            align-items: center;
+        }
+
+        .promo__blog_info {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="font-style: italic">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">My Awesome Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " style="justify-content: flex-end" id="navbarNavAltMarkup">
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-link " href="#">About Me</a>
+                    <a class="nav-link" href="#">Facebook</a>
+                    <a class="nav-link" href="{% url 'show_blog' %}">Blog</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+    <section class="promo">
+        <div class="container ">
+            <div class="promo__block">
+                <div class="promo__item">
+                    <img src="https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png" alt="">
+                    <h2>Lorem ipsum <br> dolor sit amet, <br> consectetur</h2>
+                    <button><a href="">Mail Me</a></button>
+                </div>
+            </div>
+            <div class="promo__blog">
+                {% for blog in blogs.all %}
+                    <a href="{% url 'post_detail' post_id=blog.id %}">
+                        <div class="promo__blog_item">
+
+                            <h1>{{ blog.title }}</h1>
+                            <img src="{{ blog.img.url }}" alt="">
+                            <p>{{ blog.get_summary }}</p>
+                            <p>{{ blog.date }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+-->
+</body>
+</html>
